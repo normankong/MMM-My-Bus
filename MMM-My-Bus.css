@@ -1,0 +1,40 @@
+.MMM-My-Bus .table {
+	border-spacing: 0px 0px;
+	border-collapse: separate;
+	text-align: left;
+	width: 600px;
+	line-height: 180%;
+}
+
+.MMM-My-Bus .spacerRow {
+	padding-bottom: 5px;
+}
+
+.MMM-My-Bus .destination {
+	font-weight: normal;
+}
+
+.MMM-My-Bus .headRow {
+	font-size: 15px;
+	color: white;
+}
+
+.MMM-My-Bus .dataRow {
+	font-size: 35px;
+	color: yellow;
+}
+
+
+.MMM-My-Bus .line {
+	border-spacing: 10px 0px;
+	border-collapse: separate;
+	text-align: left;
+	font-weight: normal;
+	width: 100px;
+}
+
+.MMM-My-Bus .departure {
+	padding-left: 10px;
+	text-align: right;
+	font-weight: normal;
+}
