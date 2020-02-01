@@ -22,7 +22,7 @@ Module.register("MMM-My-Bus", {
 
     getTranslations: function () {
         return {
-            en: "translations/en.json",
+            "en": "translations/en.json",
             "zh-tw": "translations/zh.json"
         };
     },
@@ -117,6 +117,7 @@ Module.register("MMM-My-Bus", {
 
         var header = document.createElement("header");
         header.innerHTML = this.translate("BUS_INFO");
+        header.className = "headRow";
         wrapper.appendChild(header);
 
         // Start creating connections table
@@ -129,9 +130,16 @@ Module.register("MMM-My-Bus", {
         table.appendChild(this.createSpacerRow());
 
         var row = 0;
+        var stationName = null;
         for (t in this.etaItems) {
             var etaObj = this.etaItems[t];
             if (etaObj.type == "DUMMY") continue;
+
+            if (stationName == null) {
+                stationName = etaObj.data.route.CName;
+                header.innerHTML += ` ${stationName}`;
+            }
+
             data = this.createDataRow(etaObj);
             if (!data)
                 continue;
@@ -212,18 +220,24 @@ Module.register("MMM-My-Bus", {
         let now = moment();
         etaInfo = routeObj.data.raw.data.response;
         if (etaInfo.length > 0) {
-            var departure = document.createElement("td");
-            departure.className = "departure";
-            etaArray = [];
+
+            let etaArray = [];
+            let now = moment();
+            let i = 0;
             for (r in etaInfo) {
                 var etaStr = etaInfo[r].t.split('　')[0];;
                 let etaTime = moment(etaStr, "hh:mm:ss");
-                let text = moment.duration(now.diff(etaTime)).humanize().replace(" ", "");
-                etaArray.push(text);
-
-                if (r == 1) break;
+                if (etaTime > now) {
+                    let text = moment.duration(now.diff(etaTime)).humanize().replace(" ", "");
+                    etaArray.push(text);
+                    i++;
+                }
+                if (i == 2) break;
             }
-            departure.innerHTML = etaArray.toString();
+
+            var departure = document.createElement("td");
+            departure.className = "departure";
+            departure.innerHTML = (etaArray.length != 0) ? etaArray.toString() : this.translate("LAST_BUS_DEPART");
             row.appendChild(departure);
         }
 

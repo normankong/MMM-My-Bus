@@ -3,7 +3,6 @@
 	border-collapse: separate;
 	text-align: left;
 	width: 600px;
-	line-height: 180%;
 }
 
 .MMM-My-Bus .spacerRow {
@@ -17,11 +16,14 @@
 .MMM-My-Bus .headRow {
 	font-size: 15px;
 	color: white;
+	margin-bottom: 2px;
+	padding-bottom: 2px;
 }
 
 .MMM-My-Bus .dataRow {
 	font-size: 35px;
 	color: yellow;
+	line-height: 35px;
 }
 
 
